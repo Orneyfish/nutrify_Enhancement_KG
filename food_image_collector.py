@@ -88,13 +88,10 @@ with st.form(key="image_metadata_submit_form", clear_on_submit=True):
                 day become publicly available)*'
     )
 
-    # Submit button + logic
-    submit_button = st.form_submit_button(
+    if submit_button := st.form_submit_button(
         label="Upload image",
         help="Click to upload your image and label to Nutrify servers",
-    )
-
-    if submit_button:
+    ):
         if uploaded_image is None:
             st.error("Please upload an image")
         else:
@@ -110,8 +107,9 @@ with st.form(key="image_metadata_submit_form", clear_on_submit=True):
             with st.spinner("Sending your image across the internet..."):
                 upload_blob(
                     source_file_name=uploaded_image,
-                    destination_blob_name=unique_image_id + ".jpeg",
+                    destination_blob_name=f"{unique_image_id}.jpeg",
                 )
+
 
             # Add image metadata to Gsheet
             img_height = image.height
