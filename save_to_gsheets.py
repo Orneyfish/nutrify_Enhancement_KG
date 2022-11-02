@@ -67,7 +67,4 @@ def append_values_to_gsheet(values_to_add: List):
             body=value_range_body,
         )
     )
-    response = request.execute()
-
-    # Show the output of what was added
-    return response
+    return request.execute()
